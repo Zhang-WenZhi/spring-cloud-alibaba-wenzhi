@@ -1,0 +1,16 @@
+#server:
+#  port: 9081
+
+spring:
+  application:
+    name: point-service
+  config:
+    import: nacos:point-service2-dev.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+
