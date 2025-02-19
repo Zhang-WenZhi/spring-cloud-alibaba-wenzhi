@@ -10,3 +10,18 @@ spring:
       config:
         server-addr: localhost:8848
         file-extension: yml
+
+#  ai:
+#    dashscope:
+#      base-url: http://localhost:8080/api/v1/
+#      api-key: my-api-key
+#      chat:
+#        options:
+#          model: deepseank-r1
+# application.properties
+deepseek:
+  api:
+    key: sk-ba020f17c21d4948b9f4d015c3396900
+    # DeepSeek 的自然语言处理（NLP）服务，端点可能是 /v1/chat/completions 或 /v1/text/generate
+    # 图像处理服务，端点可能是 /v1/image/process
+    url: https://api.deepseek.com/v1/chat/completions

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wenzhi.leetcode_service.dao.RiskDao">
+
+    <resultMap id="RiskResultMap" type="RiskEntity">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="description" column="description" />
+    </resultMap>
+
+    <select id="findById" resultMap="RiskResultMap">
+        SELECT * FROM risk WHERE id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="RiskResultMap">
+        SELECT * FROM risk
+    </select>
+
+    <insert id="save" parameterType="RiskEntity" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO risk (name, description) VALUES (#{name}, #{description})
+    </insert>
+
+    <update id="update" parameterType="RiskEntity">
+        UPDATE risk SET name = #{name}, description = #{description} WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM risk WHERE id = #{id}
+    </delete>
+
+</mapper>
