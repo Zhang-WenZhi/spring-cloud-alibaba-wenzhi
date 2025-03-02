@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenzhi.leetcode_service.dao.UserDao">
+    <resultMap id="userResultMap" type="com.wenzhi.leetcode_service.entity.UserEntity">
+        <id property="id" column="id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="nickname" column="nickname" />
+        <result property="email" column="email" />
+        <result property="phone" column="phone" />
+    </resultMap>
+
+    <select id="findByUsername" resultMap="userResultMap">
+        SELECT id, username, password, nickname, email, phone
+        FROM users
+        WHERE username = #{username}
+    </select>
+</mapper>

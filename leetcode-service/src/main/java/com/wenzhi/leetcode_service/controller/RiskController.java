@@ -2,11 +2,14 @@ package com.wenzhi.leetcode_service.controller;
 
 import com.wenzhi.leetcode_service.entity.RiskEntity;
 import com.wenzhi.leetcode_service.service.RiskService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/risks")
 public class RiskController {
@@ -20,6 +23,7 @@ public class RiskController {
 
     @GetMapping("/{id}")
     public RiskEntity getRiskById(@PathVariable Long id) {
+        log.info("入参:::{}", id);
         return riskService.getRiskById(id);
     }
 

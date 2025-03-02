@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9096
 
 spring:
   datasource:
@@ -7,7 +7,51 @@ spring:
     username: postgres
     password: zwz_123
     driver-class-name: org.postgresql.Driver
-
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #password: your-password (如有密码)
+    database: 0
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.wenzhi.leetcode_service.entity
+  configuration:
+    map-underscore-to-camel-case: true     # 开启驼峰命名转换
+    default-fetch-size: 100
+    default-statement-timeout: 30
+# 日志配置（可选）
+logging:
+  level:
+    com.wenzhi.leetcode_service.dao: DEBUG
+redisson:
+  config: |  # 直接配置 Redisson 参数
+    singleServerConfig:
+      timeout: 5000  # 单位毫秒
+      connectionMinimumIdleSize: 10  # 最小空闲连接
+      connectionPoolSize: 64        # 最大连接数
+      idleConnectionTimeout: 10000
+      address: "redis://${spring.redis.host}:${spring.redis.port}"
+      database: ${spring.redis.database}
+      #password: ${spring.redis.password}
+    codec: !<org.redisson.codec.JsonJacksonCodec> {}  # 使用 JSON 序列化
+# 集群模式
+#redisson:
+#  config: |
+#    clusterServersConfig:
+#      nodeAddresses:
+#        - "redis://192.168.1.101:6379"
+#        - "redis://192.168.1.102:6379"
+#        - "redis://192.168.1.103:6379"
+#      password: "your-cluster-password"
+#      scanInterval: 5000  # 集群状态检查间隔
+#    codec: !<org.redisson.codec.MsgPackJacksonCodec> {}  # 高性能序列化
+
+# @Scheduled注解配置
+task:
+  fixed:
+    rate: 5000
+  cron: 0 0/30 * * * ?
+  cleanup:
+    cron: "0 0 3 * * ?"  # 每天凌晨3点执行
+  report:
+      interval: 3600000     # 每小时执行一次（单位：毫秒）
