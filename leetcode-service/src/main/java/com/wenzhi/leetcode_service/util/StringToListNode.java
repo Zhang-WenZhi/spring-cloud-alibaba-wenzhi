@@ -6,7 +6,7 @@ public class StringToListNode {
     public static int[] stringToIntegerArray(String input) {
         input = input.trim();
         input = input.substring(1, input.length() - 1);
-        if (input.length() == 0) {
+        if (input.isEmpty()) {
             return new int[0];
         }
 

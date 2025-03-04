@@ -41,6 +41,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
 
         <!-- JSON Processing API -->
         <dependency>
@@ -151,10 +156,32 @@
 <!--            <scope>runtime</scope>-->
 <!--        </dependency>-->
 
-
+        <!-- 在NotificationService中添加重试机制 -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
 
 
 
     </dependencies>
+
+    <build>
+        <resources>
+            <!-- 确保该类所在的模块被正确引入到项目中 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.class</include>
+                </includes>
+            </resource>
+            <!-- 确保 src/main/resources 目录下的文件被正确处理 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <!-- 其他构建配置 -->
+    </build>
 
 </project>

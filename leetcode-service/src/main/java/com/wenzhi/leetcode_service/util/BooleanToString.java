@@ -6,6 +6,6 @@ public class BooleanToString {
     }
 
     public static boolean stringToBool(String input) {
-        return input.toLowerCase() == "true";
+        return input.equalsIgnoreCase("true");
     }
 }

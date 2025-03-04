@@ -1,17 +1,21 @@
 package com.wenzhi.leetcode_service.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     /**
      * UserServiceImpl中使用了BCryptPasswordEncoder加密密码，这里配置BCryptPasswordEncoder
@@ -21,30 +25,15 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // 将Spring Boot版本回退至2.7.x或更早版本（如2.7.10），此时WebSecurityConfigurerAdapter仍有效
-    // extends WebSecurityConfigurerAdapter @EnableWebSecurity
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable() // 关闭 CSRF 保护（生产环境需谨慎）
-//                .authorizeRequests()
-//                .anyRequest().permitAll() // 允许所有请求无需认证
-//                .and()
-//                .logout().permitAll(); // 允许注销
-//    }
-
-
-    // 在Spring Boot 3.x版本中，WebSecurityConfigurerAdapter类已被官方弃用。
-    // 若你使用的是spring-boot-starter-security 3.3.3（对应Spring Security 6.x）
-    /*
-    * 不加这个，spring-boot-starter-security生成了一个密码，用户名user，都是登陆报错的
-    * **/
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((auth) -> auth
-                .anyRequest().permitAll() // 允许所有请求无需认证
-                // authenticated() 所有请求都需要认证
-        );
+        logger.info("Configuring SecurityFilterChain...");
+        http.csrf(AbstractHttpConfigurer::disable) // 禁用 CSRF 保护
+                .authorizeHttpRequests((auth) -> {
+            auth.anyRequest().permitAll(); // 允许所有请求无需认证
+            logger.info("All requests are permitted without authentication.");
+        });
+        logger.info("Building SecurityFilterChain...");
         return http.build();
     }
 }

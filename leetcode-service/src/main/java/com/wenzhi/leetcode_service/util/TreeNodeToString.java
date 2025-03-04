@@ -9,18 +9,18 @@ public class TreeNodeToString {
             return "[]";
         }
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
         Queue<TreeNode> nodeQueue = new LinkedList<>();
         nodeQueue.add(root);
         while(!nodeQueue.isEmpty()) {
             TreeNode node = nodeQueue.remove();
 
             if (node == null) {
-                output += "null, ";
+                output.append("null, ");
                 continue;
             }
 
-            output += String.valueOf(node.val) + ", ";
+            output.append(String.valueOf(node.val)).append(", ");
             nodeQueue.add(node.left);
             nodeQueue.add(node.right);
         }
@@ -30,7 +30,7 @@ public class TreeNodeToString {
     public static TreeNode stringToTreeNode(String input) {
         input = input.trim();
         input = input.substring(1, input.length() - 1);
-        if (input.length() == 0) {
+        if (input.isEmpty()) {
             return null;
         }
 

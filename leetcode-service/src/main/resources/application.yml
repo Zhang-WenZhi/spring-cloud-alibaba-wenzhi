@@ -15,10 +15,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.wenzhi.leetcode_service.entity
-  configuration:
-    map-underscore-to-camel-case: true     # 开启驼峰命名转换
-    default-fetch-size: 100
-    default-statement-timeout: 30
+  config-location: classpath:mybatis-config.xml # 指定 mybatis-config.xml 文件的位置
 # 日志配置（可选）
 logging:
   level:
@@ -55,3 +52,7 @@ task:
     cron: "0 0 3 * * ?"  # 每天凌晨3点执行
   report:
       interval: 3600000     # 每小时执行一次（单位：毫秒）
+##############定时日志清理配资#############
+notification:
+  webhook-url: http://localhost:${server.port}/alert
+  retain-log-days: 30

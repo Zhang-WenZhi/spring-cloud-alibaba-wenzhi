@@ -9,8 +9,8 @@ public class StringToIntegerArrayList {
         input = input.substring(1, input.length() - 1);
         String[] parts = input.split(",");
         ArrayList<Integer> output = new ArrayList<Integer>();
-        for(int index = 0; index < parts.length; index++) {
-            String part = parts[index].trim();
+        for (String s : parts) {
+            String part = s.trim();
             output.add(Integer.parseInt(part));
         }
         return output;
@@ -21,10 +21,10 @@ public class StringToIntegerArrayList {
             return "[]";
         }
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(int index = 0; index < length; index++) {
             Integer number = nums.get(index);
-            result += Integer.toString(number) + ", ";
+            result.append(number).append(", ");
         }
         return "[" + result.substring(0, result.length() - 2) + "]";
     }
