@@ -5,12 +5,15 @@ import com.wenzhi.leetcode_service.dao.UserDao;
 import com.wenzhi.leetcode_service.entity.vo.UserVO;
 import com.wenzhi.leetcode_service.service.UserService;
 import com.wenzhi.leetcode_service.entity.exception.BusinessException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserDao userMapper;
@@ -24,12 +27,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO login(String username, String password) {
+        log.info("login username: {}, password: {}", username, password);
         // 查询用户
         Optional<UserEntity> userOpt = userMapper.findByUsername(username);
         UserEntity user = userOpt.orElseThrow(() -> new BusinessException(404, "用户不存在"));
+        log.info("login user: {}", user.getPassword());
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(password);
+        log.info("encodedPassword: {}", encodedPassword);
+
+        boolean matches = passwordEncoder.matches(password, encodedPassword);
+        log.info("匹配结果: {}", matches);
 
         // 验证密码
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (!passwordEncoder.matches(password, encodedPassword)) {
             throw new BusinessException(401, "密码错误");
         }
 
