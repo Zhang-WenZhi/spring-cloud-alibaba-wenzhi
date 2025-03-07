@@ -1,5 +1,6 @@
 package com.wenzhi.leetcode_service.entity.message;
 
+import jakarta.validation.Valid;
 import lombok.Data;
 
 @Data
@@ -7,6 +8,7 @@ public class Request<T> {
     // 公共请求头（可根据业务扩展）
     private Header header;
     // 业务请求体（泛型）
+    @Valid
     private T body;
 
     @Data

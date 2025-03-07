@@ -10,6 +10,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -37,11 +39,12 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(password);
         log.info("encodedPassword: {}", encodedPassword);
 
+        // 有误，随便输入一个1，都能匹配成功
         boolean matches = passwordEncoder.matches(password, encodedPassword);
         log.info("匹配结果: {}", matches);
 
         // 验证密码
-        if (!passwordEncoder.matches(password, encodedPassword)) {
+        if (!Objects.equals(password, user.getPassword())) {
             throw new BusinessException(401, "密码错误");
         }
 
