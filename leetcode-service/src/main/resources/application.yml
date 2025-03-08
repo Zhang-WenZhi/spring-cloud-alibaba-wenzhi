@@ -2,6 +2,16 @@ server:
   port: 9096
 
 spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    cache: false
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .ftl
+    charset: UTF-8
+    cache: false
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <title>用户列表</title>
+    <style>
+        :root {
+            --primary: #2962FF;
+            --secondary: #FF5722;
+            --light: #F5F5F5;
+            --dark: #212121;
+            --success: #4CAF50;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--dark);
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .user-item {
+            background: var(--light);
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .user-item:hover {
+            transform: translateX(10px);
+            background: var(--primary);
+            color: white;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 250px;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .user-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+        }
+    </style>
+    <script>
+        function exportExcel() {
+            // 构造请求体
+            const requestData = {
+                header: {
+                    clientType: "APP",
+                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+                    timestamp: 1640995600,
+                    version: "v1.0"
+                },
+                body: {
+                    id: 1
+                }
+            };
+
+            // 发送 POST 请求
+            fetch('/excelExport/exportRiskById', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('导出失败');
+                return response.blob(); // 获取二进制数据
+            })
+            .then(blob => {
+                // 创建下载链接
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'risk_info.xlsx';
+                document.body.appendChild(a);
+                a.click();
+            })
+            .catch(error => alert(error.message));
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>用户列表</h1>
+    <ul class="user-list">
+        <li class="user-item" th:each="user : ${users}" th:text="${user}"></li>
+    </ul>
+    <button onclick="exportExcel()">导出风险信息</button>
+</div>
+</body>
+</html>
