@@ -2,11 +2,16 @@ package com.wenzhi.leetcode_service.controller;
 
 
 import com.wenzhi.leetcode_service.entity.RiskEntity;
+import com.wenzhi.leetcode_service.entity.dto.RiskByIdDto;
+import com.wenzhi.leetcode_service.entity.message.Request;
+import com.wenzhi.leetcode_service.entity.message.Response;
 import com.wenzhi.leetcode_service.service.RiskService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@Slf4j
 public class RiskControllerTest {
 
     @Mock
@@ -32,17 +38,37 @@ public class RiskControllerTest {
 
     @Test
     public void testGetRiskById() {
-        RiskEntity risk = new RiskEntity();
-        risk.setId(1L);
-        risk.setName("Test Risk");
+        // 创建 Mock 对象
+        RiskService mockRiskService = Mockito.mock(RiskService.class);
+        RiskController riskController = new RiskController(mockRiskService);
 
-        when(riskService.getRiskById(1L)).thenReturn(risk);
+        // 准备测试数据
+        RiskByIdDto dto = new RiskByIdDto();
+        dto.setId(1L);
+        Request<RiskByIdDto> request = new Request<>();
+        request.setBody(dto);
 
-        RiskEntity result = riskController.getRiskById(1L);
+        // 准备模拟的返回数据
+        RiskEntity mockRiskEntity = new RiskEntity();
+        mockRiskEntity.setId(1L);
+        mockRiskEntity.setName("Test Risk");
 
-        assertNotNull(result);
-        assertEquals("Test Risk", result.getName());
-        verify(riskService).getRiskById(1L);
+        // 设置 Mock 方法的返回值
+        when(mockRiskService.getRiskById(1L)).thenReturn(mockRiskEntity);
+
+        // 调用控制器方法
+        Response<RiskEntity> response = riskController.getRiskById(request);
+        log.info("getRiskById response: {}", response.getData());
+
+        // 验证结果
+        assertEquals(HttpStatus.OK.value(), response.getCode());
+        assertEquals("success", response.getMessage());
+        assertEquals(mockRiskEntity.getId(), response.getData().getId());
+        assertEquals(mockRiskEntity.getName(), response.getData().getName());
+
+        // 验证服务方法是否被调用
+        verify(mockRiskService, times(1)).getRiskById(request.getBody().getId());
+
     }
 
     @Test
@@ -59,38 +85,79 @@ public class RiskControllerTest {
 
         when(riskService.getAllRisks()).thenReturn(risks);
 
-        List<RiskEntity> result = riskController.getAllRisks();
+        Response<List<RiskEntity>> result = riskController.getAllRisks();
 
         assertNotNull(result);
-        assertEquals(2, result.size());
+        assertEquals(2, result.getData().size());
         verify(riskService).getAllRisks();
     }
 
     @Test
     public void testCreateRisk() {
+        // 创建 Mock 对象
+        RiskService mockRiskService = Mockito.mock(RiskService.class);
+        RiskController riskController = new RiskController(mockRiskService);
+
+        // 准备测试数据
         RiskEntity risk = new RiskEntity();
         risk.setName("New Risk");
+        Request<RiskEntity> request = new Request<>();
+        request.setBody(risk);
 
-        riskController.createRisk(risk);
+        // 调用控制器方法
+        Response<String> response = riskController.createRisk(request);
 
-        verify(riskService).createRisk(risk);
+        // 验证结果
+        assertEquals(HttpStatus.OK.value(), response.getCode());
+        assertEquals("success", response.getMessage());
+
+        // 验证服务方法是否被调用
+        verify(mockRiskService, times(1)).createRisk(risk);
     }
 
     @Test
     public void testUpdateRisk() {
+        // 创建 Mock 对象
+        RiskService mockRiskService = Mockito.mock(RiskService.class);
+        RiskController riskController = new RiskController(mockRiskService);
+        // 准备测试数据
         RiskEntity risk = new RiskEntity();
         risk.setId(1L);
         risk.setName("Updated Risk");
+        Request<RiskEntity> request = new Request<>();
+        request.setBody(risk);
 
-        riskController.updateRisk(risk);
+        Response<String> response = riskController.updateRisk(request);
+        log.info("response: {}", response);
+        // 验证结果
+        assertEquals(HttpStatus.OK.value(), response.getCode());
+        assertEquals("success", response.getMessage());
 
-        verify(riskService).updateRisk(risk);
+        verify(mockRiskService, times(1)).updateRisk(risk);
     }
 
     @Test
     public void testDeleteRisk() {
-        riskController.deleteRisk(1L);
+        // 创建 Mock 对象
+        RiskService mockRiskService = Mockito.mock(RiskService.class);
+        RiskController riskController = new RiskController(mockRiskService);
 
-        verify(riskService).deleteRisk(1L);
+        // 准备测试数据
+        RiskByIdDto dto = new RiskByIdDto();
+        dto.setId(1L);
+        Request<RiskByIdDto> request = new Request<>();
+        request.setBody(dto);
+
+        // 调用控制器方法
+        Response<String> response = riskController.deleteRisk(request);
+        log.info("deleteRisk response: {}", response.getData());
+
+        // 验证响应结果
+        assertEquals(200, response.getCode());
+        assertEquals("success", response.getMessage());
+        assertEquals("删除成功", response.getData());
+
+        // 验证服务方法是否被调用
+        verify(mockRiskService, times(1)).deleteRisk(request.getBody().getId());
     }
 }
