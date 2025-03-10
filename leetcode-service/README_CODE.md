@@ -1,3 +1,96 @@
+## 模板试图配置【不管用】 备份
+
+```java
+
+package com.wenzhi.leetcode_service.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
+import java.util.Properties;
+
+@Configuration
+public class ViewResolverConfig {
+
+    // JSP 视图解析器
+    @Bean
+    public ViewResolver jspViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/WEB-INF/jsp/");
+        resolver.setSuffix(".jsp");
+        resolver.setOrder(1);
+        // resolver.setViewNames(new String[]{"*"}); // 处理所有无扩展名请求
+        resolver.setViewNames(new String[]{"*.jsp"}); // 处理所有无扩展名请求
+        return resolver;
+    }
+
+    // Thymeleaf 模板解析器
+    @Bean
+    public ClassLoaderTemplateResolver thymeleafTemplateResolver() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setPrefix("templates/thymeleaf/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setOrder(2); // 优先级低于 JSP
+        return templateResolver;
+    }
+
+    // Thymeleaf 模板引擎
+    @Bean
+    public SpringTemplateEngine thymeleafTemplateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(thymeleafTemplateResolver());
+        return templateEngine;
+    }
+
+    // Thymeleaf 视图解析器
+    @Bean
+    public ThymeleafViewResolver thymeleafViewResolver() {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(thymeleafTemplateEngine());
+        viewResolver.setCharacterEncoding("UTF-8");
+        viewResolver.setOrder(2); // 优先级低于 JSP
+        viewResolver.setViewNames(new String[]{"*.html"}); // 仅处理 .html 文件
+        return viewResolver;
+    }
+
+    // FreeMarker 配置器
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer() {
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("classpath:templates/freemarker/");
+
+        // 设置 FreeMarker 的配置属性，包括字符编码
+        Properties settings = new Properties();
+        settings.setProperty("default_encoding", "UTF-8");
+        settings.setProperty("output_encoding", "UTF-8");
+        configurer.setFreemarkerSettings(settings);
+
+        return configurer;
+    }
+
+    // FreeMarker 视图解析器
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver() {
+        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+        resolver.setPrefix("");
+        resolver.setSuffix(".ftl");
+        resolver.setOrder(3); // 优先级低于 JSP 和 Thymeleaf
+        resolver.setViewNames(new String[]{"*.ftl"}); // 仅处理 .ftl 文件
+        return resolver;
+    }
+}
+```
+
+
 ## testExportRiskByIdUrl【失败】 代码备份
 
 ```shell

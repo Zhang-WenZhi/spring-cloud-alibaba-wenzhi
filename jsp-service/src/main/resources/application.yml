@@ -1,0 +1,13 @@
+server:
+  port: 9097
+  servlet:
+    context-path: /jsp-service
+
+spring:
+#  web:
+#    resources:
+#      static-locations: classpath:/static/,classpath:/public/,classpath:/templates/ # 排除 WEB-INF 路径
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp

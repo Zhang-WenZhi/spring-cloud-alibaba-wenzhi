@@ -36,7 +36,8 @@
 		<module>gateway-service</module>
 		<module>user-service</module>
 		<module>leetcode-service</module>
-	</modules>
+        <module>jsp-service</module>
+    </modules>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
