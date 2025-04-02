@@ -1,3 +1,17 @@
+## macOS  maven环境变量配置
+
+```shell
+echo $SHELL
+# 如果输出 /bin/zsh，则编辑 ~/.zshrc
+# 如果输出 /bin/bash，则编辑 ~/.bash_profile
+```
+
+```shell
+# 设置 Maven 路径
+export M2_HOME="/Users/zhangwenzhi/WenzhiInstalledSoft/apache-maven-3.8.3"
+export PATH="$M2_HOME/bin:$PATH"
+```
+
 ## macOS brew用不了的情况下，java多版本切换
 
 ```shell
