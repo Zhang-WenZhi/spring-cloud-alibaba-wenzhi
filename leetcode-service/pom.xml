@@ -211,6 +211,104 @@
             <version>5.8.36</version>
         </dependency>
 
+<!--        &lt;!&ndash; shardingJDBC 核心依赖 &ndash;&gt;-->
+<!--        &lt;!&ndash; 2022年停止更新 https://mvnrepository.com/artifact/org.apache.shardingsphere/shardingsphere-jdbc-core-spring-boot-starter &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shardingsphere</groupId>-->
+<!--            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>-->
+<!--            <version>5.2.1</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.yaml</groupId>-->
+<!--                    <artifactId>snakeyaml</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>me.ahoo.cosid</groupId>-->
+<!--                    <artifactId>cosid-core</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 啃爹的版本冲突 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.yaml</groupId>-->
+<!--            <artifactId>snakeyaml</artifactId>-->
+<!--            &lt;!&ndash; <version>1.33</version> 2025年有在更新&ndash;&gt;-->
+<!--            <version>2.4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>me.ahoo.cosid</groupId>-->
+<!--            <artifactId>cosid-core</artifactId>-->
+<!--            &lt;!&ndash; <version>1.19.3</version> 2025年有在更新&ndash;&gt;-->
+<!--            <version>2.12.3</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; XA 分布式事务 &ndash;&gt;-->
+<!--        &lt;!&ndash; 这个2025还在更新的：5.5.2，https://mvnrepository.com/artifact/org.apache.shardingsphere/shardingsphere-transaction-xa-core &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shardingsphere</groupId>-->
+<!--            <artifactId>shardingsphere-transaction-xa-core</artifactId>-->
+<!--            &lt;!&ndash; <version>5.2.1</version>&ndash;&gt;-->
+<!--            <version>5.5.2</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.atomikos</groupId>-->
+<!--                    <artifactId>transactions-jdbc</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.atomikos</groupId>-->
+<!--                    <artifactId>transactions-jta</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; 版本滞后了 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.atomikos</groupId>-->
+<!--            <artifactId>transactions-jdbc</artifactId>-->
+<!--            &lt;!&ndash;<version>5.0.8</version> 2020&ndash;&gt;-->
+<!--            &lt;!&ndash; 2023年停止更新 &ndash;&gt;-->
+<!--            <version>6.0.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.atomikos</groupId>-->
+<!--            <artifactId>transactions-jta</artifactId>-->
+<!--            &lt;!&ndash;<version>5.0.8</version> 2020&ndash;&gt;-->
+<!--            &lt;!&ndash; 2023年停止更新 &ndash;&gt;-->
+<!--            <version>6.0.0</version>-->
+<!--        </dependency>-->
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>sprint-boot-starter</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <exclusions>&ndash;&gt;-->
+<!--&lt;!&ndash;                <exclusion>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <groupId>org.yaml</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <artifactId>snakeyaml</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;                </exclusion>&ndash;&gt;-->
+<!--&lt;!&ndash;            </exclusions>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash; 连接池依赖：不要用starter-druid,由于starter-druid会自动配置一个datasource，会和sharding的datasource产生冲突 &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid</artifactId>-->
+<!--&lt;!&ndash;            <version>1.2.20</version>&ndash;&gt;-->
+<!--            &lt;!&ndash; 2024年 &ndash;&gt;-->
+<!--            <version>1.2.24</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter</artifactId>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.yaml</groupId>-->
+<!--                    <artifactId>snakeyaml</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
+<!--        </dependency>-->
+
 
     </dependencies>
 

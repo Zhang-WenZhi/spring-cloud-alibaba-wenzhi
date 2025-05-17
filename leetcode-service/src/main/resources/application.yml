@@ -26,6 +26,10 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.wenzhi.leetcode_service.entity
   config-location: classpath:mybatis-config.xml # 指定 mybatis-config.xml 文件的位置
+#  monitor:
+#    slow-sql-threshold: 500   # 慢SQL阈值
+#    enable-param-log: true     # 是否记录参数明细
+#    max-param-length: 200      # 参数值最大显示长度
 # 日志配置（可选）
 logging:
   level:
