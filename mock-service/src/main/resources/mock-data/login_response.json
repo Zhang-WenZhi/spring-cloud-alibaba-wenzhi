@@ -1,0 +1,22 @@
+{
+  "header": {
+    "timestamp": 1696300800000,
+    "clientType": "web",
+    "version": "1.0.0",
+    "requestId": "req-20231004-123456"
+  },
+  "response": {
+    "method": "login",
+    "code": 200,
+    "data": {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+      "expireIn": 3600,
+      "userInfo": {
+        "id": 12345,
+        "name": "张三",
+        "role": "admin"
+      }
+    },
+    "message": "登录成功"
+  }
+}

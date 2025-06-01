@@ -1,0 +1,21 @@
+server:
+  port: 9099
+
+mock:
+  rules:
+    /api/service#POST#submitOrder:
+      file: classpath:mock-data/order_result.json
+      headers:
+        Content-Type: application/json
+    # 匹配路径为 /api/service 的POST请求，且请求体中method=login
+    /api/service#POST#login:
+      file: mock-data/login_response.json
+      headers:
+        Content-Type: application/json
+        X-Mock: "true"
+    # 匹配路径为 /api/service 的POST请求，且请求体中method=getUserInfo
+    /api/service#POST#getUserInfo:
+      file: mock-data/user_info.json
+      headers:
+        Content-Type: application/json
+        X-Mock: "true"

@@ -1,0 +1,20 @@
+{
+  "header": {
+    "timestamp": 1696291200000,
+    "clientType": "web",
+    "version": "1.0.0",
+    "requestId": "req-20231003-123456"
+  },
+  "response": {
+    "method": "getUserInfo",
+    "code": 200,
+    "data": {
+      "id": 12345,
+      "name": "张三",
+      "age": 30,
+      "email": "zhangsan@example.com",
+      "role": "admin"
+    },
+    "message": "用户信息获取成功"
+  }
+}

@@ -37,6 +37,7 @@
 		<module>user-service</module>
 		<module>leetcode-service</module>
         <module>jsp-service</module>
+        <module>mock-service</module>
     </modules>
 
 	<properties>

@@ -1,0 +1,19 @@
+{
+  "header": {
+    "timestamp": 1696291210000,
+    "clientType": "mobile", // 移动端
+    "version": "1.0.1",
+    "requestId": "req-20231003-123457"
+  },
+  "response": {
+    "method": "submitOrder",
+    "code": 200,
+    "data": {
+      "orderId": "ORD-20231003-67890",
+      "status": "pending",
+      "createTime": 1696291210000,
+      "paymentUrl": "https://example.com/payment/ORD-20231003-67890"
+    },
+    "message": "订单提交成功"
+  }
+}
