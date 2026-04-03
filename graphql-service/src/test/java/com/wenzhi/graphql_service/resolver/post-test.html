@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form id="graphqlForm" method="POST" action="http://localhost:8080/graphql">
+    <textarea name="query" style="width:500px;height:100px">
+      mutation { createUser(name: "表单测试", email: "form@example.com") { id name } }
+    </textarea>
+    <br>
+    <button type="submit">发送POST请求</button>
+</form>
+</body>
+</html>
+<!--不行！！且中文乱码-->

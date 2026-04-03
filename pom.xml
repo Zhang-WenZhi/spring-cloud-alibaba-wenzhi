@@ -35,10 +35,11 @@
 		<module>point-service</module>
 		<module>gateway-service</module>
 		<module>user-service</module>
-		<module>leetcode-service</module>
+		<module>leetcode-service</module><!-- mybatis -->
         <module>jsp-service</module>
         <module>mock-service</module>
-    </modules>
+		<module>graphql-service</module><!-- graphql -->
+	</modules>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>

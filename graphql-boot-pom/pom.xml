@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.wenzhi</groupId>
+    <artifactId>graphql-boot-pom</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>graphql-boot-pom</name>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <java.version>17</java.version>
+        <spring-boot.version>3.5.4</spring-boot.version>
+        <graphql-java.version>24.1</graphql-java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot Web -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}}</version>
+            </dependency>
+            <!-- 测试依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- GraphQL Java -->
+            <dependency>
+                <groupId>com.graphql-java</groupId>
+                <artifactId>graphql-java</artifactId>
+                <version>24.1</version>
+            </dependency>
+            <!-- GraphQL Java Tools -->
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-java-tools</artifactId>
+                <version>14.0.1</version>
+            </dependency>
+            <!-- GraphQL Spring Boot Starter -->
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>graphql-spring-boot-starter</artifactId>
+                <version>15.1.0</version>
+            </dependency>
+            <!-- GraphQL Playground (可选，用于调试) -->
+            <dependency>
+                <groupId>com.graphql-java-kickstart</groupId>
+                <artifactId>playground-spring-boot-starter</artifactId>
+                <version>11.1.0</version>
+            </dependency>
+
+
+        </dependencies>
+    </dependencyManagement>
+
+</project>

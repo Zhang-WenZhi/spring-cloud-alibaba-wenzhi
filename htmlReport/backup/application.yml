@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: graphql-service
+  graphql:
+    graphiql:
+      enabled: true

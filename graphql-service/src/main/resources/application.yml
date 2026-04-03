@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: graphql-service
+  graphql:
+    graphiql:
+      enabled: true
+#      # 配置GraphiQL使用我们的代理资源
+#      resource-base-path: /graphiql
+#      plugin-resource-path: /graphiql-plugins
+      # 配置GraphiQL使用我们代理的资源路径
+      static-path: /graphiql
+      # 自定义GraphiQL页面位置
+      path: /graphiql
+    schema:
+      locations: classpath:graphql/
+
+# 日志配置，方便调试
+logging:
+  level:
+    org.springframework.web.cors: DEBUG
+    org.springframework.graphql: INFO
